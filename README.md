@@ -48,7 +48,7 @@
   <a name="referencias--prefer-const"></a><a name="2.1"></a>
   - [2.1](#referencias--prefer-const) Python não tem um tipo `constant`, então você precisa se atentar à convenção de sempre utilizar os nomes em UPPERCASE e nunca modificá-los.
 
-    > Por que? Isso garante que você não altere o valor da constante, evitando bugs e dificuldade na compreensão do código.
+    > Por que? Isso garante que você não altere o valor da constante, evitando bugs e não dificultando a compreensão do código.
 
     ```python
     # bad
@@ -64,8 +64,8 @@
 
 ## Dicionários
 
-  <a name="dictionaries--literals"></a><a name="3.1"></a>
-  - [3.1](#dictionaries--literals) Use the literal syntax for dictionary creation.
+  <a name="dicionarios--literal"></a><a name="3.1"></a>
+  - [3.1](#dicionarios--literal) Use a sintaxe literal para declaração de um dicionário.
 
     ```python
     # bad
@@ -75,33 +75,8 @@
     item = {}
     ```
 
-  <a name="computed-key"></a><a name="3.2"></a>
-  - [3.2](#computed-key) Use computed key names when creating dictionaries with dynamic key names.
-
-    > Why? They allow you to define all the key of a dictionary in one place.
-
-    ```python
-
-    def get_key(k):
-        return f'a key named {k}'
-
-    # bad
-    obj = {
-        'id': 5,
-        'name': 'San Francisco',
-    }
-    obj[get_key('enabled')] = True
-
-    # good
-    obj = {
-        'id': 5,
-        'name': 'San Francisco',
-        get_key('enabled'): True,
-    }
-    ```
-
-  <a name="dictionaries--spread"></a><a name="3.3"></a>
-  - [3.3](#dictionaries--spread) Prefer the dictionary spread operator over `copy()` to shallow-copy and extend dictionaries.
+  <a name="dicionarios--spread"></a><a name="3.2"></a>
+  - [3.2](#dicionarios--spread) Prefira utilizar o conceito `spread` ao invés de `copy()` para copiar e extender dicionários.
 
     ```python
     # bad
@@ -119,8 +94,8 @@
     long_clone = {**original, **original_2, 'e': 5}
     ```
 
-  <a name="dictionaries--braces-newline"></a><a name="3.4"></a>
-  - [3.4](#dictionaries--braces-newline) Use line breaks after open and before close dictionary braces only if a dictionary has multiple lines.
+  <a name="dictionaries--braces-newline"></a><a name="3.3"></a>
+  - [3.3](#dictionaries--braces-newline) Se o dicionário tiver mais de um item, utilize sempre uma quebra de linha antes e depois do conteúdo do dicionário.
 
     ```python
     # bad - single item will not exceed one line
@@ -143,10 +118,10 @@
     }
     ```
 
-  <a name="dictionaries--use-get"></a><a name="3.5"></a>
-  - [3.5](#dictionaries--use-get) Use `dict.get(key)` to get properties.
+  <a name="dictionaries--use-get"></a><a name="3.4"></a>
+  - [3.4](#dictionaries--use-get) Use `dict.get(key)` para acessar um item do dicionário.
 
-    > Why? Getting via `dict[key]` will break on missing key, and requires bloated code to guard against.
+    > Por que? Usando `dict[key]` seu código irá quebrar ao tentar acessar uma key inexistente no dicionário, e isso requere validações desnecessárias ao tentar acessar um item.
 
     ```python
     item_map = {
