@@ -17,6 +17,8 @@
     - `number`
     - `boolean`
     - `None`
+    
+    <br>
 
     ```python
     foo = 1
@@ -33,6 +35,8 @@
     - `dict`
     - `list`
     - `function`
+
+    <br>
 
     ```python
     foo = [1, 2]
