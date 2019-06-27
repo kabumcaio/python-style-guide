@@ -201,7 +201,7 @@
         'id': 2
     }]
 
-
+    # bad
     number_list = [
         1, 2,
     ]
@@ -209,13 +209,16 @@
     # good
     items = [[0, 1], [2, 3], [4, 5]]
 
+    # good
     dict_list = [
         {'id': 1},
         {'id': 2},
     ]
 
+    # good
     number_list = [1, 2]
 
+    # good
     number_list = [
         1,
         2,
