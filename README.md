@@ -7,6 +7,7 @@
   3. [Dicionários](#dicionários)
   4. [Listas](#listas) 
   5. [Strings](#strings)
+  6. [Funções](#funções)
 
 ## Tipos
 
@@ -225,6 +226,22 @@
     ]
     ```
 
+  <a name="list-comprehension"></a><a name="4.3"></a>
+  - [4.4](#list-comprehension) Utilizar list comprehension sempre que possível
+
+    ```python
+    # bad
+    my_input_numbers = [1, 2, 3, 4, 5, 6, 7, 8]
+    for number in my_input_numbers:
+        if number % 2 != 0:
+            my_odd_numbers.append(number)
+
+    #good
+    my_input_numbers = [1, 2, 3, 4, 5, 6, 7, 8]
+    my_odd_numbers = [x for x in my_input_numbers if x % 2 != 0]
+
+    ```
+
 **[⬆ voltar ao topo](#conteúdo)**
 
 ## Strings
@@ -314,6 +331,153 @@
 
     # good
     foo = '\'this\' is "quoted"'
+    ```
+
+**[⬆ voltar ao topo](#conteúdo)**
+
+## Funções
+
+  <a name="parametros-default"></a><a name="6.1"></a>
+  - [6.1](#parametros-default) Use parâmetros com valor default ao invés de alterar o parâmetro da função
+
+    ```python
+    # really bad
+    def do_something(opt):
+        # Não devemos alterar o valor dos parâmetros da função.
+        opt = opt or 'foo'
+        # ...
+
+    # still bad
+    def do_something(opt):
+        if (opt is None):
+            opt = 'foo'
+        # ...
+
+    # good
+    def do_something(opt='foo'):
+        # ...
+    ```
+
+  <a name="parametros-default-nao-complexos"></a><a name="6.2"></a>
+  - [6.2](#parametros-default-nao-complexos) Não use tipos complexos como parâmetros default.
+
+    > Por que? Como vimos [aqui](#tipos--complexos), uma variável de tipo complexo é uma referência, ou seja, somente uma única instância dessa referência vai ser alterada.
+
+    ```python
+    # bad
+    def init_list(value, new_list=[]):
+        new_list.append(value)
+        return new_list
+
+    init_list(1)
+    # => [1]
+    init_list(2)
+    # => [1, 2]
+
+    # good
+    def init_list(value, new_list=None):
+        if new_list is None:
+            new_list = []
+        new_list.append(value)
+        return new_list
+
+    init_list(1)
+    # => [1]
+    init_list(2)
+    # => [2]
+    ```
+
+  <a name="assinatura--função-sem-espaços"></a><a name="6.3"></a>
+  - [6.3](#assinatura--função-sem-espaços) Não utilizar espaços na assinatura da função
+
+    > Por quê? Código mais legível e facilita nas buscas.
+
+    ```python
+    # bad
+    def foo(a): print(a)
+    def bar (b): print(b)
+
+    # good
+    def foo(a): print(a)
+    def bar(b): print(b)
+    ```
+
+  <a name="funções--alterar-param"></a><a name="6.4"></a>
+  - [6.4](#funções--alterar-param) Nunca altere o valor de um parâmetro de função.
+
+    > Por que? Alterar o valor de um parâmetro pode ocasionar bugs e comportamentos inesperados.
+
+    ```python
+    # bad
+    def fn_1(a):
+        a = 1
+        # ...
+
+    # bad
+    def fn_2(a):
+        if (a > 10): a = 10
+        # ...
+
+    # good
+    def fn_3(a):
+        b = a or 10
+        # ...
+
+    # good
+    def fn_3(a):
+        b = a
+        if (b > 1): b = 1
+        # ...
+
+    # good
+    def fn_4(a=1):
+        # ...
+    ```
+
+  <a name="funções--assinatura-indentação"></a><a name="6.5"></a>
+  - [6.5](#funções--assinatura-indentação) Funções com assinatura em mais de uma linha devem ser indentadas como qualquer outra lista ou dicionário multilinha.
+
+    ```python
+    # bad
+    def some_fn(foo,
+                bar,
+                baz):
+        # ...
+
+    # bad
+    def some_fn(foo,
+      bar,
+      baz):
+        # ...
+
+    # good
+    def some_fn(
+        foo,
+        bar,
+        baz,
+    ):
+        # ...
+
+    ```
+
+  <a name="funções--param-nome"></a><a name="6.6"></a>
+  - [6.6](#funções--param-nome) Utilize o nome do parâmetro ao chamar a função.
+
+    > Por que? Fica mais claro qual o propósito daquela função e futuramente em uma necessidade de alterar a assinatura da função é menos provável que aconteça erros por utilizar "keyword arguments" ao invés de "normal arguments". [Veja aqui](https://treyhunner.com/2018/04/keyword-arguments-in-python/)
+
+    ```python
+    def move(x, y, roll=False):
+        # ...
+
+    # bad - não é claro o que a função faz
+    move(1, 0, True)
+
+    # good
+    move(x=1, y=0, roll=True)
+
+    # futuramente fica mais fácil adicionar novos parâmetros
+    def move(x, y, z=0, roll=False):
+        # ...
     ```
 
 **[⬆ voltar ao topo](#conteúdo)**
