@@ -291,7 +291,7 @@
     ```
 
   <a name="template-literais"></a><a name="5.3"></a>
-  - [5.3](#template-literais) Quando construir strings programaticamente, utilizar `format()` ao invés de concatenação.
+  - [5.3](#template-literais) Quando construir strings programaticamente, utilizar `format()` ao invés de concatenação e do `%s`.
 
     ```python
     # bad
@@ -301,6 +301,10 @@
     # bad
     def hello(name):
         return ''.join(['Hello, ', name, '!'])
+
+    # bad
+    def hello(name):
+        return 'Hello, %s!' % name
 
     # good
     def hello(name):
