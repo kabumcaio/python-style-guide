@@ -8,6 +8,10 @@
   4. [Listas](#listas) 
   5. [Strings](#strings)
   6. [Funções](#funções)
+  7. [Classes & Construtores](#classes--construtores)
+  8. [Módulos](#módulos)
+  9. [Iteradores & Geradores](#iteradores--geradores)
+  10. [Variáveis](#variáveis)
 
 ## Tipos
 
@@ -479,5 +483,21 @@
     def move(x, y, z=0, roll=False):
         # ...
     ```
+
+**[⬆ voltar ao topo](#conteúdo)**
+
+## Classes & Construtores
+
+**[⬆ voltar ao topo](#conteúdo)**
+
+## Módulos
+
+**[⬆ voltar ao topo](#conteúdo)**
+
+## Iteradores & Geradores
+
+**[⬆ voltar ao topo](#conteúdo)**
+
+## Variáveis
 
 **[⬆ voltar ao topo](#conteúdo)**
